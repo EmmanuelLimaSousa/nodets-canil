@@ -2,7 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mustache from 'mustache-express';
 import path from 'path';
-import mainRoutes from './routes/index';
+import { fileURLToPath } from 'url';
+import mainRoutes from './routes/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -17,9 +21,10 @@ server.use(express.static(path.join(__dirname, '../public')));
 server.use(mainRoutes);
 
 server.use((req, res) => {
-    res.status(404).send("Página não Encontrada - Verifique as rotas");
-});    
+    res.render('pages/404');
+});
 
-server.listen(process.env.PORT || 3000, () => {
-    console.log(`Servidor rodando na porta ${process.env.PORT || 3000}`);
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+    console.log(`Servidor rodando em: http://localhost:${port}`);
 });

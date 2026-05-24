@@ -9,14 +9,14 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EmmanuelLimaSousa/nodets-canil.git"
-  },
+  }, 
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "nodemon -e ts,json,mustache src/server.ts"
+    "start-dev": "nodemon -e ts,json,mustache --exec \"node --loader ts-node/esm --no-warnings\" src/server.ts"
   },
   "dependencies": {
     "dotenv": "^17.4.2",

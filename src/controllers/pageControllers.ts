@@ -1,17 +1,56 @@
 import { Request, Response } from 'express';
 
+import {Pet} from '../models/pet.js';
+import { createMenuObject } from '../helpers/createMenuObject.js';
+
 export const home = (req: Request, res: Response) => {
-    res.send('home no controller!');
+    let list = Pet.getAll();
+
+    res.render('pages/page', {
+        menu: createMenuObject('all'),
+        banner: {
+            title: 'Todos os animais',
+            background: 'allanimals.jpg'
+            },
+        list
+    });
 }
 
 export const dogs = (req: Request, res: Response) => {
-    res.send('Área dos Cachorros');
+    let list = Pet.getFromType('dog');
+
+    res.render('pages/page', {
+        menu: createMenuObject('dogs'),
+        banner: {
+            title: 'Cachorros',
+            background: 'banner_dog.jpg'
+        },
+        list
+    });
 }
 
 export const cats = (req: Request, res: Response) => {
-    res.send('Área dos Gatos');
+    let list = Pet.getFromType('cat');
+
+    res.render('pages/page', {
+        menu: createMenuObject('cats'),
+        banner: {
+            title: 'Gatos',
+            background: 'banner_cat.jpg'
+        },
+        list
+    });
 }
 
-export const fishers = (req: Request, res: Response) => {
-    res.send('Área dos Peixes');
+export const fishes = (req: Request, res: Response) => {
+    let list = Pet.getFromType('fish');
+
+    res.render('pages/page', {
+        menu: createMenuObject('fishes'),
+        banner: {
+            title: 'Peixes',
+            background: 'banner_fish.jpg'
+        },
+        list
+    });
 }
