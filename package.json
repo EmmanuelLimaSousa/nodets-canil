@@ -2,6 +2,9 @@
   "name": "nodets-canil",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "22.x"
+  },
   "homepage": "https://github.com/EmmanuelLimaSousa/nodets-canil#readme",
   "bugs": {
     "url": "https://github.com/EmmanuelLimaSousa/nodets-canil/issues"
@@ -9,12 +12,15 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EmmanuelLimaSousa/nodets-canil.git"
-  }, 
+  },
   "license": "ISC",
   "author": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc && copyfiles -u 1 \"src/**/*.mustache\" dist",
+    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "nodemon -e ts,json,mustache --exec \"node --loader ts-node/esm --no-warnings\" src/server.ts"
   },
@@ -27,6 +33,7 @@
     "@types/express": "^5.0.6",
     "@types/mustache-express": "^1.2.5",
     "@types/node": "^25.9.1",
+    "copyfiles": "^2.4.1",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
